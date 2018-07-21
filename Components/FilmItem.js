@@ -1,23 +1,25 @@
 import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
+import { getImageFromApi } from "../API/TMDBApi";
 
 class FilmItem extends React.Component {
     render() {
+        const film = this.props.film;
         return (
             <View style={styles.main_container}>
-                <Image style={styles.image} source={{ uri: "image" }} />
+                <Image style={styles.image} source={{ uri: getImageFromApi(film.poster_path) }} />
                 <View style={styles.content}>
                     <View style={styles.header}>
-                        <Text style={styles.tite_text}>Titre du film</Text>
-                        <Text style={styles.vote_text}>Votes</Text>
+                        <Text style={styles.title_text}>{film.title}</Text>
+                        <Text style={styles.vote_text}>{film.vote_average}</Text>
                     </View>
                     <View style={styles.description}>
                         <Text style={styles.description_text} numberOfLines={6}>
-                            Description
+                            {film.overview}
                         </Text>
                     </View>
                     <View style={styles.date}>
-                        <Text style={styles.date_text}>Sorti le 00/00/00</Text>
+                        <Text style={styles.date_text}>Sorti le {film.release_date}</Text>
                     </View>
                 </View>
             </View>
@@ -42,10 +44,10 @@ const styles = StyleSheet.create({
         margin: 5
     },
     header: {
-        flex: 1,
+        flex: 2,
         flexDirection: "row"
     },
-    tite_text: {
+    title_text: {
         flex: 1,
         fontWeight: "bold",
         fontSize: 20,
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
         color: "#666"
     },
     description: {
-        flex: 3
+        flex: 4
     },
     description_text: {
         color: "#666",
