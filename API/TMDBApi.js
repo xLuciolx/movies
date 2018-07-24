@@ -1,8 +1,13 @@
 const token = "b1d9012cc84163eaae0dc00204efa919";
 
-export function getMoviesFromSearch(text) {
+export function getMoviesFromSearch(text, page) {
     const url =
-        "https://api.themoviedb.org/3/search/movie?api_key=" + token + "&language=fr&query=" + text;
+        "https://api.themoviedb.org/3/search/movie?api_key=" +
+        token +
+        "&language=fr&query=" +
+        text +
+        "&page=" +
+        page;
     return fetch(url)
         .then(res => res.json())
         .catch(err => console.error(err));
